@@ -1,0 +1,27 @@
+{
+  "name": "collaborative-writing-tool",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start":"node server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "engines" : {
+    "node" : "11.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muskan777/Collaborative-Writing-Tool.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Muskan777/Collaborative-Writing-Tool/issues"
+  },
+  "homepage": "https://github.com/Muskan777/Collaborative-Writing-Tool#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  }
+}
