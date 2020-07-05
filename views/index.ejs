@@ -1,0 +1,13 @@
+<%- include("./partials/header.ejs") %>
+	<p>Welcome to the TEXT EDITOR</p>
+	<div>
+        <textarea rows="37" cols="120" id="editor" style="background-color:dimgrey;color:white" placeholder="Type Your Text..."></textarea>
+    </div>
+    <form id="message-form">
+		<input type="text" name="message" placeholder="Message">
+		<button type="submit" id="submit-btn">Send</button>
+		<button type="submit" id="send-location">Send Location</button>
+	</form>
+	<script src = "/socket.io/socket.io.js"></script>
+	<script src = "/js/client.js"></script>
+<%- include("./partials/footer.ejs") %>
