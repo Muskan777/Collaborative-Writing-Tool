@@ -1,13 +1,24 @@
 <%- include("./partials/header.ejs") %>
+<h1 style="text-align:center">
 	<p>Welcome to the TEXT EDITOR</p>
+</h1>
+<div class="container">
 	<div>
-        <textarea rows="37" cols="120" id="editor" style="background-color:dimgrey;color:white" placeholder="Type Your Text..."></textarea>
+        <textarea rows="37" cols="140" id="editor" style="background-color:dimgrey;color:white" placeholder="Type Your Text..."></textarea>
     </div>
+	<h1>User Chats</h1>
     <form id="message-form">
-		<input type="text" name="message" placeholder="Message">
-		<button type="submit" id="submit-btn">Send</button>
-		<button type="submit" id="send-location">Send Location</button>
+		<div class="form-group" style="float: left;">
+			<input type="text" name="message" placeholder="Message">
+		</div>
+		<div class="form-group" style="float: none;">
+			<button class="btn btn-sm btn-primary" type="submit" id="submit-btn">Send</button>
+		</div>
+		<div class="form-group" style="float: right;">
+			<button class="btn btn-sm btn-primary" type="submit" id="send-location">Send Location</button>
+		</div>
 	</form>
 	<script src = "/socket.io/socket.io.js"></script>
 	<script src = "/js/client.js"></script>
+</div>
 <%- include("./partials/footer.ejs") %>

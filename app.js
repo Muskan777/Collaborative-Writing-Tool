@@ -8,9 +8,11 @@ let server = http.createServer(app);
 var formidable = require('formidable');
 var mongoose = require("mongoose");
 var passport = require("passport");
+var fs = require('fs');
 var localStrategy = require("passport-local");
 var passportLocalMongoose = require("passport-local-mongoose");
 var User = require("./models/user.js");
+var upload = require("express-fileupload");
 
 //APP CONFIG
 app.use(require("express-session")({
@@ -18,6 +20,8 @@ app.use(require("express-session")({
 	resave:false,
 	saveUninitialized: false
 }))
+
+app.use(upload());
 
 mongoose.set('useNewUrlParser',true);
 mongoose.set('useUnifiedTopology',true);
@@ -77,8 +81,7 @@ app.get('/login', function(req,res) {
 app.post("/login", passport.authenticate("local",{
 	successRedirect: "/open",
 	failureRedirect: "/login"
-}),function(req,res){
-	
+	}),function(req,res){	
 })
 
 //show signup form
@@ -111,14 +114,25 @@ app.get('/upload', function(req,res) {
 	res.render("upload.ejs");
 })
 
-app.post('/fileupload', function(req,res) {
-	var form = new formidable.IncomingForm();
-    form.parse(req, function (err, field) {
-     	console.log(fields);
-     	console.log(files);
-   })
+app.post('/upload', function(req,res) {
+	if(req.files) {
+		var file = req.files.fileUpload,
+			filename = req.files.fileUpload.name;
+		file.mv("./Uploads/" + filename, function(err) {
+			if(err) {
+				console.log(err);
+				res.send("Error Occured");
+			}
+			else {
+			fs.readFile("./Uploads"+ filename, 'utf8', function(err, contents) {
+    			console.log(contents);
+			});
+				res.send("done!!");
+				//res.render("fileupload.ejs",{data:});
+			}
+		})
+	}
 })
-
 
 app.get('/new', function(req,res) {
 	res.render("new.ejs");

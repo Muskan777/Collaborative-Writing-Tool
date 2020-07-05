@@ -34,7 +34,7 @@ socket.on("newLocationMessage", function(message) {
 	a.innerText= "My Current Location";	
 	li.appendChild(a);
 
-	document.querySelector('body').appendChild(li);
+	document.querySelector("body").appendChild(li);
 });
 
 document.querySelector("#submit-btn").addEventListener('click', function(e) {
