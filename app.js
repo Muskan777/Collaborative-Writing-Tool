@@ -41,6 +41,11 @@ let io = socketIO(server);
 
 app.use(express.static(publicPath));
 
+app.use(function(req,res,next) {
+	res.locals.currentUser = req.user;
+	next();
+})
+
 io.on("connection", function(socket) {
 	console.log("a new user connected");
 
@@ -69,7 +74,7 @@ io.on("connection", function(socket) {
 
 
 app.get('/', function(req,res) {
-	res.redirect("/login");
+	res.render("home.ejs");
 })
 
 //show signup form
@@ -108,6 +113,14 @@ app.get("/open",isLoggedIn,function(req,res) {
 
 app.get('/share', function(req,res) {
 	res.render("share.ejs");
+})
+
+app.get("/save", function(data){
+	fs.writeFile('Uploads/file.txt', data, function(err) {
+		if(err) {
+			console.log(err);
+		}	
+	})
 })
 
 app.get('/upload', function(req,res) {
@@ -150,6 +163,6 @@ function isLoggedIn(req,res,next){
 	res.redirect("/login");
 }
 
-server.listen(3000, function() {
-	console.log('Server is up on port 3000');
+server.listen(7000, function() {
+	console.log('Server is up on port 7000');
 })

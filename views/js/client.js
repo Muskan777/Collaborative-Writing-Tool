@@ -1,4 +1,5 @@
 let socket = io()
+
 socket.on("connect", function() {
 	console.log("connected to server");
 });
@@ -16,13 +17,21 @@ document.querySelector("#editor").addEventListener('keyup', function(e) {
 	socket.emit("createMessage",document.querySelector('textarea').value);
 });
 
+document.querySelector("#save").addEventListener("click", function(e) {
+	e.preventDefault();
+	var data = document.querySelector("textarea").value;
+	console.log(data);
+	redirect("/save", data);
+})
+
+
+
 socket.on( "NMessage", function(message) {
 	console.log( "NMessage", message);
 	let li = document.createElement('li');
 	li.innerText = message.from + " : " + message.text;
-	document.querySelector('body').appendChild(li);
+	document.querySelector('#mess').appendChild(li);
 });
-
 
 socket.on("newLocationMessage", function(message) {
 	console.log("newLocation", message);
